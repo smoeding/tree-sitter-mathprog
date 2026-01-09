@@ -1,0 +1,58 @@
+================================================================================
+minimize objective
+================================================================================
+minimize obj: x + 1.5 * (y + z);
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (objective
+      (symbolic_name)
+      (linear_expression
+        (expr
+          (symbolic_name))
+        (operator)
+        (expr
+          (expr
+            (expr
+              (number))
+            (operator)
+            (expr
+              (expr
+                (expr
+                  (symbolic_name))
+                (operator)
+                (expr
+                  (symbolic_name))))))))))
+
+================================================================================
+maximize objective
+================================================================================
+maximize total_profit: sum{p in prd} profit[p] * make[p];
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (objective
+      (symbolic_name)
+      (linear_expression
+        (expr
+          (expr
+            (operator)
+            (indexing_expression
+              (indexing_entry
+                (symbolic_name)
+                (expr
+                  (symbolic_name))))
+            (expr
+              (expr
+                (symbolic_name)
+                (subscript
+                  (expr
+                    (symbolic_name))))
+              (operator)
+              (expr
+                (symbolic_name)
+                (subscript
+                  (expr
+                    (symbolic_name)))))))))))

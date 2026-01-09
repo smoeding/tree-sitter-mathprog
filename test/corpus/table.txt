@@ -1,0 +1,58 @@
+================================================================================
+table in
+================================================================================
+table data IN "CSV" "data.csv": S <- [FROM,TO], d~DISTANCE, c~COST;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (table
+      (symbolic_name)
+      (sym_expr
+        (string))
+      (sym_expr
+        (string))
+      (symbolic_name)
+      (symbolic_name)
+      (symbolic_name)
+      (symbolic_name)
+      (symbolic_name)
+      (symbolic_name)
+      (symbolic_name))))
+
+================================================================================
+table out
+================================================================================
+table result{(f,t) in S} OUT "CSV" "result.csv": f~FROM, t~TO, x[f,t]~FLOW;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (table
+      (symbolic_name)
+      (indexing_expression
+        (indexing_entry
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))))
+      (sym_expr
+        (string))
+      (sym_expr
+        (string))
+      (num_expr
+        (symbolic_name))
+      (symbolic_name)
+      (num_expr
+        (symbolic_name))
+      (symbolic_name)
+      (num_expr
+        (symbolic_name)
+        (subscript
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))))
+      (symbolic_name))))

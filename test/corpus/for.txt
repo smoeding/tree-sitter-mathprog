@@ -1,0 +1,73 @@
+================================================================================
+for in a single line
+================================================================================
+for {1..72} printf("*");
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (for
+      (indexing_expression
+        (indexing_entry
+          (expr
+            (expr
+              (number))
+            (expr
+              (number)))))
+      (printf
+        (expr
+          (expr
+            (string)))))))
+
+================================================================================
+for with block
+================================================================================
+for {(i,j) in E: i != j}
+{ printf "flow from %s to %s is %g\n", i, j, x[i,j];
+  check x[i,j] >= 0;
+}
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (for
+      (indexing_expression
+        (indexing_entry
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name)))
+        (expr
+          (expr
+            (symbolic_name))
+          (operator)
+          (expr
+            (symbolic_name))))
+      (printf
+        (expr
+          (string))
+        (expr
+          (symbolic_name))
+        (expr
+          (symbolic_name))
+        (expr
+          (symbolic_name)
+          (subscript
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name)))))
+      (check
+        (expr
+          (expr
+            (symbolic_name)
+            (subscript
+              (expr
+                (symbolic_name))
+              (expr
+                (symbolic_name))))
+          (operator)
+          (expr
+            (number)))))))

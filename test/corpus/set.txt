@@ -1,0 +1,354 @@
+================================================================================
+simple set
+================================================================================
+set nodes;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (set
+      (symbolic_name))))
+
+================================================================================
+set with superset
+================================================================================
+set arcs within nodes cross nodes;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (set
+      (symbolic_name)
+      (attribute
+        (expr
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name)))))))
+
+================================================================================
+set with setof condition
+================================================================================
+set C := setof{a in A, b in B[a]} b;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (set
+      (symbolic_name)
+      (attribute
+        (expr
+          (indexing_expression
+            (indexing_entry
+              (symbolic_name)
+              (expr
+                (symbolic_name)))
+            (indexing_entry
+              (symbolic_name)
+              (expr
+                (symbolic_name)
+                (subscript
+                  (expr
+                    (symbolic_name))))))
+          (expr
+            (symbolic_name)))))))
+
+================================================================================
+set with complex setof condition
+================================================================================
+set S := setof{c in C, i in 1..m, j in 1..n:
+         forall{(ii,jj) in D[c]} ((i+ii,j+jj) in R)} (c,i,j);
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (set
+      (symbolic_name)
+      (attribute
+        (expr
+          (indexing_expression
+            (indexing_entry
+              (symbolic_name)
+              (expr
+                (symbolic_name)))
+            (indexing_entry
+              (symbolic_name)
+              (expr
+                (expr
+                  (number))
+                (expr
+                  (symbolic_name))))
+            (indexing_entry
+              (symbolic_name)
+              (expr
+                (expr
+                  (number))
+                (expr
+                  (symbolic_name))))
+            (expr
+              (operator)
+              (indexing_expression
+                (indexing_entry
+                  (expr
+                    (symbolic_name))
+                  (expr
+                    (symbolic_name))
+                  (expr
+                    (symbolic_name)
+                    (subscript
+                      (expr
+                        (symbolic_name))))))
+              (expr
+                (expr
+                  (expr
+                    (expr
+                      (expr
+                        (symbolic_name))
+                      (operator)
+                      (expr
+                        (symbolic_name)))
+                    (expr
+                      (expr
+                        (symbolic_name))
+                      (operator)
+                      (expr
+                        (symbolic_name))))
+                  (operator)
+                  (expr
+                    (symbolic_name))))))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name)))))))
+
+================================================================================
+complex set with conditional
+================================================================================
+set step{s in 1..maxiter} dimen 2 := if s = 1 then arcs else step[s-1]
+   union setof{k in nodes, (i,k) in step[s-1], (k,j) in step[s-1]}(i,j);
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (set
+      (symbolic_name)
+      (indexing_expression
+        (indexing_entry
+          (symbolic_name)
+          (expr
+            (expr
+              (number))
+            (expr
+              (symbolic_name)))))
+      (attribute
+        (number))
+      (attribute
+        (expr
+          (conditional_expression
+            (expr
+              (expr
+                (symbolic_name))
+              (operator)
+              (expr
+                (number)))
+            (expr
+              (symbolic_name))
+            (expr
+              (expr
+                (symbolic_name)
+                (subscript
+                  (expr
+                    (expr
+                      (symbolic_name))
+                    (operator)
+                    (expr
+                      (number)))))
+              (expr
+                (indexing_expression
+                  (indexing_entry
+                    (symbolic_name)
+                    (expr
+                      (symbolic_name)))
+                  (indexing_entry
+                    (expr
+                      (symbolic_name))
+                    (expr
+                      (symbolic_name))
+                    (expr
+                      (symbolic_name)
+                      (subscript
+                        (expr
+                          (expr
+                            (symbolic_name))
+                          (operator)
+                          (expr
+                            (number))))))
+                  (indexing_entry
+                    (expr
+                      (symbolic_name))
+                    (expr
+                      (symbolic_name))
+                    (expr
+                      (symbolic_name)
+                      (subscript
+                        (expr
+                          (expr
+                            (symbolic_name))
+                          (operator)
+                          (expr
+                            (number)))))))
+                (expr
+                  (symbolic_name))
+                (expr
+                  (symbolic_name))))))))))
+
+================================================================================
+complex set with multiple attributes
+================================================================================
+set A{i in I, j in J}, within B[i+1] cross C[j-1], within D diff E,
+   default {('abc',123), (321,'cba')};
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (set
+      (symbolic_name)
+      (indexing_expression
+        (indexing_entry
+          (symbolic_name)
+          (expr
+            (symbolic_name)))
+        (indexing_entry
+          (symbolic_name)
+          (expr
+            (symbolic_name))))
+      (attribute
+        (expr
+          (expr
+            (symbolic_name)
+            (subscript
+              (expr
+                (expr
+                  (symbolic_name))
+                (operator)
+                (expr
+                  (number)))))
+          (expr
+            (symbolic_name)
+            (subscript
+              (expr
+                (expr
+                  (symbolic_name))
+                (operator)
+                (expr
+                  (number)))))))
+      (attribute
+        (expr
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))))
+      (attribute
+        (expr
+          (literal_set
+            (tupel
+              (expr
+                (string))
+              (expr
+                (number)))
+            (tupel
+              (expr
+                (number))
+              (expr
+                (string)))))))))
+
+================================================================================
+set with set function call and comments
+================================================================================
+set Eh := { (i,j,k,l) in { V, V }:
+          i = k and j < l and             # Same row and left to right
+          card({ (s,t) in V: s = i and t > j and t < l }) = 0
+};
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (set
+      (symbolic_name)
+      (attribute
+        (expr
+          (indexing_expression
+            (indexing_entry
+              (expr
+                (symbolic_name))
+              (expr
+                (symbolic_name))
+              (expr
+                (symbolic_name))
+              (expr
+                (symbolic_name))
+              (expr
+                (indexing_expression
+                  (indexing_entry
+                    (expr
+                      (symbolic_name)))
+                  (indexing_entry
+                    (expr
+                      (symbolic_name))))))
+            (expr
+              (expr
+                (expr
+                  (expr
+                    (symbolic_name))
+                  (operator)
+                  (expr
+                    (symbolic_name)))
+                (operator)
+                (expr
+                  (expr
+                    (symbolic_name))
+                  (operator)
+                  (expr
+                    (symbolic_name))))
+              (operator)
+              (comment)
+              (expr
+                (expr
+                  (function_call
+                    (function_name)
+                    (expr
+                      (indexing_expression
+                        (indexing_entry
+                          (expr
+                            (symbolic_name))
+                          (expr
+                            (symbolic_name))
+                          (expr
+                            (symbolic_name)))
+                        (expr
+                          (expr
+                            (expr
+                              (expr
+                                (symbolic_name))
+                              (operator)
+                              (expr
+                                (symbolic_name)))
+                            (operator)
+                            (expr
+                              (expr
+                                (symbolic_name))
+                              (operator)
+                              (expr
+                                (symbolic_name))))
+                          (operator)
+                          (expr
+                            (expr
+                              (symbolic_name))
+                            (operator)
+                            (expr
+                              (symbolic_name))))))))
+                (operator)
+                (expr
+                  (number))))))))))

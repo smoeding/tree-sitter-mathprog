@@ -1,0 +1,903 @@
+================================================================================
+data
+================================================================================
+data;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data)))
+
+================================================================================
+symbolic data set
+================================================================================
+data;
+set month := Jan Feb Mar Apr May Jun;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (set_data
+      (symbolic_name)
+      (record)
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword))))))
+
+================================================================================
+string data set
+================================================================================
+data;
+set month "Jan", "Feb", "Mar", "Apr", "May", "Jun";
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (set_data
+      (symbolic_name)
+      (record
+        (value
+          (string)))
+      (record
+        (value
+          (string)))
+      (record
+        (value
+          (string)))
+      (record
+        (value
+          (string)))
+      (record
+        (value
+          (string)))
+      (record
+        (value
+          (string))))))
+
+================================================================================
+array of doublets
+================================================================================
+data;
+set A[3,'Mar'] : 1 2 3 4 :=
+               1 - + - -
+               2 - + + -
+               3 + - - +
+               4 - + - + ;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (set_data
+      (symbolic_name)
+      (subscript
+        (expr
+          (number))
+        (expr
+          (string)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (number)))
+      (record)
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (bareword))))))
+
+================================================================================
+simple set of triplets
+================================================================================
+data;
+set B := (1,2,3) (1,3,2) (2,3,1) (2,1,3) (1,2,2) (1,1,1) (2,1,1);
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (set_data
+      (symbolic_name)
+      (record)
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number)))))))
+
+================================================================================
+simple set of triplets using slices
+================================================================================
+data;
+set B := (1,*,2) 3 2 (2,*,1) 3 1 (1,2,3) (2,1,3) (1,1,1);
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (set_data
+      (symbolic_name)
+      (record)
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (number)))
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (number)))
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (slice
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number)))))))
+
+================================================================================
+simple param data
+================================================================================
+data;
+param T := 4;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (record)
+      (record
+        (value
+          (number))))))
+
+================================================================================
+param_data2
+================================================================================
+data;
+param month := 1 Jan 2 Feb 3 Mar 4 Apr 5 May;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (record)
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword))))))
+
+================================================================================
+param_data3
+================================================================================
+data;
+param month := [1] 'Jan', [2] 'Feb', [3] 'Mar', [4] 'Apr', [5] 'May';
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (record)
+      (record
+        (slice
+          (value
+            (number))))
+      (record
+        (value
+          (string)))
+      (record
+        (slice
+          (value
+            (number))))
+      (record
+        (value
+          (string)))
+      (record
+        (slice
+          (value
+            (number))))
+      (record
+        (value
+          (string)))
+      (record
+        (slice
+          (value
+            (number))))
+      (record
+        (value
+          (string)))
+      (record
+        (slice
+          (value
+            (number))))
+      (record
+        (value
+          (string))))))
+
+================================================================================
+param_data4
+================================================================================
+data;
+param init_stock := iron 7.32 nickel 35.8;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (record)
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number))))))
+
+================================================================================
+param_data5
+================================================================================
+data;
+param init_stock [*] iron 7.32, nickel 35.8;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (record
+        (slice))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number))))))
+
+================================================================================
+param_data6
+================================================================================
+data;
+param cost [iron] .025 [nickel] .03;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (record
+        (slice
+          (value
+            (bareword))))
+      (record
+        (value
+          (number)))
+      (record
+        (slice
+          (value
+            (bareword))))
+      (record
+        (value
+          (number))))))
+
+================================================================================
+param_data7
+================================================================================
+data;
+param value := iron -.1, nickel .02;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (record)
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number)))
+      (record
+        (value
+          (bareword)))
+      (record
+        (value
+          (number))))))
+
+================================================================================
+param_data8
+================================================================================
+data;
+param       : init_stock cost value :=
+      iron       7.32    .025  -.1
+      nickel    35.8     .03    .02 ;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (value
+        (bareword))
+      (value
+        (bareword))
+      (value
+        (bareword))
+      (value
+        (number))
+      (value
+        (number))
+      (value
+        (number))
+      (value
+        (bareword))
+      (value
+        (number))
+      (value
+        (number))
+      (value
+        (number)))))
+
+================================================================================
+param_data9
+================================================================================
+data;
+param : raw   : init_stock cost value :=
+        iron       7.32    .025  -.1
+        nickel    35.8     .03    .02 ;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (symbolic_name)
+      (value
+        (bareword))
+      (value
+        (bareword))
+      (value
+        (bareword))
+      (value
+        (number))
+      (value
+        (number))
+      (value
+        (number))
+      (value
+        (bareword))
+      (value
+        (number))
+      (value
+        (number))
+      (value
+        (number)))))
+
+================================================================================
+param_data10
+================================================================================
+data;
+param demand default 0 (tr)
+         : FRA DET LAN WIN STL FRE LAF :=
+     bands 300  .  100  75  .  225 250
+     coils 500 750 400 250  .  850 500
+     plate 100  .   .   50 200  .  250 ;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (value
+        (number))
+      (record
+        (tabular_data
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number)))))))
+
+================================================================================
+param_data11
+================================================================================
+data;
+param trans_cost :=
+    [*,*,bands]: FRA DET LAN WIN STL FRE LAF :=
+          GARY    30  10   8  10  11  71   6
+          CLEV    22   7  10   7  21  82  13
+          PITT    19  11  12  10  25  83  15
+    [*,*,coils]: FRA DET LAN WIN STL FRE LAF :=
+          GARY    39  14  11  14  16  82   8
+          CLEV    27   9  12   9  26  95  17
+          PITT    24  14  17  13  28  99  20
+    [*,*,plate]: FRA DET LAN WIN STL FRE LAF :=
+          GARY    41  15  12  16  17  86   8
+          CLEV    29   9  13   9  28  99  18
+          PITT    26  14  17  13  31 104  20 ;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (data))
+  (statement
+    (param_data
+      (symbolic_name)
+      (record)
+      (record
+        (slice
+          (value
+            (bareword))))
+      (record
+        (tabular_data
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (slice
+          (value
+            (bareword))))
+      (record
+        (tabular_data
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))))
+      (record
+        (slice
+          (value
+            (bareword))))
+      (record
+        (tabular_data
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (bareword))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number))
+          (value
+            (number)))))))

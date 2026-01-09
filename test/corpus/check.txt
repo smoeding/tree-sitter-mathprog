@@ -1,0 +1,134 @@
+================================================================================
+check using function
+================================================================================
+check card(C) = 63;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (check
+      (expr
+        (expr
+          (function_call
+            (function_name)
+            (expr
+              (symbolic_name))))
+        (operator)
+        (expr
+          (number))))))
+
+================================================================================
+check multiple conditions
+================================================================================
+check: x + y <= 1 and x >= 0 and y >= 0;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (check
+      (expr
+        (expr
+          (expr
+            (expr
+              (expr
+                (symbolic_name))
+              (operator)
+              (expr
+                (symbolic_name)))
+            (operator)
+            (expr
+              (number)))
+          (operator)
+          (expr
+            (expr
+              (symbolic_name))
+            (operator)
+            (expr
+              (number))))
+        (operator)
+        (expr
+          (expr
+            (symbolic_name))
+          (operator)
+          (expr
+            (number)))))))
+
+================================================================================
+check set condition
+================================================================================
+check sum{i in ORIG} supply[i] = sum{j in DEST} demand[j];
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (check
+      (expr
+        (expr
+          (expr
+            (operator)
+            (indexing_expression
+              (indexing_entry
+                (symbolic_name)
+                (expr
+                  (symbolic_name))))
+            (expr
+              (symbolic_name)
+              (subscript
+                (expr
+                  (symbolic_name))))))
+        (operator)
+        (expr
+          (expr
+            (operator)
+            (indexing_expression
+              (indexing_entry
+                (symbolic_name)
+                (expr
+                  (symbolic_name))))
+            (expr
+              (symbolic_name)
+              (subscript
+                (expr
+                  (symbolic_name))))))))))
+
+================================================================================
+check domain set condition
+================================================================================
+check{i in I, j in 1..10}: S[i,j] in U[i] union V[j];
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (check
+      (indexing_expression
+        (indexing_entry
+          (symbolic_name)
+          (expr
+            (symbolic_name)))
+        (indexing_entry
+          (symbolic_name)
+          (expr
+            (expr
+              (number))
+            (expr
+              (number)))))
+      (expr
+        (expr
+          (symbolic_name)
+          (subscript
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))))
+        (operator)
+        (expr
+          (expr
+            (symbolic_name)
+            (subscript
+              (expr
+                (symbolic_name))))
+          (expr
+            (symbolic_name)
+            (subscript
+              (expr
+                (symbolic_name)))))))))

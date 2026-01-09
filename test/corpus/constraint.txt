@@ -1,0 +1,254 @@
+================================================================================
+constraint with multiple restrictions
+================================================================================
+s.t. r: x + y + z, >= 0, <= 1;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (constraint
+      (symbolic_name)
+      (linear_expression
+        (expr
+          (expr
+            (symbolic_name))
+          (operator)
+          (expr
+            (symbolic_name)))
+        (operator)
+        (expr
+          (symbolic_name)))
+      (linear_expression
+        (expr
+          (number)))
+      (linear_expression
+        (expr
+          (number))))))
+
+================================================================================
+complex constraint without keyword
+================================================================================
+limit{t in 1..T}: sum{j in prd} make[j,t] <= max_prd;
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (constraint
+      (symbolic_name)
+      (indexing_expression
+        (indexing_entry
+          (symbolic_name)
+          (expr
+            (expr
+              (number))
+            (expr
+              (symbolic_name)))))
+      (linear_expression
+        (expr
+          (expr
+            (operator)
+            (indexing_expression
+              (indexing_entry
+                (symbolic_name)
+                (expr
+                  (symbolic_name))))
+            (expr
+              (symbolic_name)
+              (subscript
+                (expr
+                  (symbolic_name))
+                (expr
+                  (symbolic_name)))))))
+      (linear_expression
+        (symbolic_name)))))
+
+================================================================================
+complex constraint with alias
+================================================================================
+
+subject to rlim 'regular-time limit' {t in time}:
+  sum{p in prd} pt[p] * rprd[p,t] <= 1.3 * dpp[t] * crews[t];
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (constraint
+      (symbolic_name)
+      (alias)
+      (indexing_expression
+        (indexing_entry
+          (symbolic_name)
+          (expr
+            (symbolic_name))))
+      (linear_expression
+        (expr
+          (expr
+            (operator)
+            (indexing_expression
+              (indexing_entry
+                (symbolic_name)
+                (expr
+                  (symbolic_name))))
+            (expr
+              (expr
+                (symbolic_name)
+                (subscript
+                  (expr
+                    (symbolic_name))))
+              (operator)
+              (expr
+                (symbolic_name)
+                (subscript
+                  (expr
+                    (symbolic_name))
+                  (expr
+                    (symbolic_name))))))))
+      (linear_expression
+        (expr
+          (expr
+            (expr
+              (number))
+            (operator)
+            (expr
+              (symbolic_name)
+              (subscript
+                (expr
+                  (symbolic_name)))))
+          (operator)
+          (expr
+            (symbolic_name)
+            (subscript
+              (expr
+                (symbolic_name)))))))))
+
+================================================================================
+constraint with many variables
+================================================================================
+s.t. cbup2{(v1,v2,v3,v4,v5,v6) in Cells: v1+v2+v3+v4+v5+v6<6}:
+    up[v1,v2,v3,v4,v5,v6] + (2**6) * x[v1,v2,v3,v4,v5,v6] <=
+    (2**6) + bup[v1+v2+v3+v4+v5+v6];
+--------------------------------------------------------------------------------
+
+(model
+  (statement
+    (constraint
+      (symbolic_name)
+      (indexing_expression
+        (indexing_entry
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name)))
+        (expr
+          (expr
+            (expr
+              (expr
+                (expr
+                  (expr
+                    (expr
+                      (symbolic_name))
+                    (operator)
+                    (expr
+                      (symbolic_name)))
+                  (operator)
+                  (expr
+                    (symbolic_name)))
+                (operator)
+                (expr
+                  (symbolic_name)))
+              (operator)
+              (expr
+                (symbolic_name)))
+            (operator)
+            (expr
+              (symbolic_name)))
+          (operator)
+          (expr
+            (number))))
+      (linear_expression
+        (expr
+          (symbolic_name)
+          (subscript
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))))
+        (operator)
+        (expr
+          (expr
+            (linear_expression
+              (expr
+                (expr
+                  (number))
+                (operator)
+                (expr
+                  (number)))))
+          (operator)
+          (expr
+            (symbolic_name)
+            (subscript
+              (expr
+                (symbolic_name))
+              (expr
+                (symbolic_name))
+              (expr
+                (symbolic_name))
+              (expr
+                (symbolic_name))
+              (expr
+                (symbolic_name))
+              (expr
+                (symbolic_name))))))
+      (linear_expression
+        (expr
+          (linear_expression
+            (expr
+              (expr
+                (number))
+              (operator)
+              (expr
+                (number)))))
+        (operator)
+        (expr
+          (symbolic_name)
+          (subscript
+            (expr
+              (expr
+                (expr
+                  (expr
+                    (expr
+                      (expr
+                        (symbolic_name))
+                      (operator)
+                      (expr
+                        (symbolic_name)))
+                    (operator)
+                    (expr
+                      (symbolic_name)))
+                  (operator)
+                  (expr
+                    (symbolic_name)))
+                (operator)
+                (expr
+                  (symbolic_name)))
+              (operator)
+              (expr
+                (symbolic_name)))))))))
