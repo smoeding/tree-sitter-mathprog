@@ -5,10 +5,9 @@ printf 'Hello, world!\n';
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (printf
-      (expr
-        (string)))))
+  (printf
+    (expr
+      (string))))
 
 ================================================================================
 printf double quoted string
@@ -17,10 +16,9 @@ printf "Hello, world!\n";
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (printf
-      (expr
-        (string)))))
+  (printf
+    (expr
+      (string))))
 
 ================================================================================
 printf string with quote symbol
@@ -29,10 +27,9 @@ printf "Hello, ""world""!\n";
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (printf
-      (expr
-        (string)))))
+  (printf
+    (expr
+      (string))))
 
 ================================================================================
 printf string with comment token
@@ -41,10 +38,9 @@ printf '# This is not a comment\n';
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (printf
-      (expr
-        (string)))))
+  (printf
+    (expr
+      (string))))
 
 ================================================================================
 printf formatted output to file
@@ -53,19 +49,18 @@ printf: "x = %.3f; y = %.3f; z = %.3f\n", x, y, z > "result.txt";
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (printf
-      (expr
-        (string))
-      (expr
-        (symbolic_name))
-      (expr
-        (symbolic_name))
-      (expr
-        (symbolic_name))
-      (operator)
-      (expr
-        (string)))))
+  (printf
+    (expr
+      (string))
+    (expr
+      (symbolic_name))
+    (expr
+      (symbolic_name))
+    (expr
+      (symbolic_name))
+    (operator)
+    (expr
+      (string))))
 
 ================================================================================
 printf domain output to file
@@ -75,37 +70,38 @@ printf{i in I, j in J}: "flow from %s to %s is %d\n", i, j, x[i,j]
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (printf
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (symbolic_name)))
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (symbolic_name))))
-      (expr
-        (string))
-      (expr
-        (symbolic_name))
-      (expr
-        (symbolic_name))
-      (expr
+  (printf
+    (indexing_expression
+      (indexing_entry
         (symbolic_name)
-        (subscript
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name))))
-      (operator)
-      (expr
-        (expr
-          (symbolic_name))
         (operator)
         (expr
-          (string))))))
+          (symbolic_name)))
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
+          (symbolic_name))))
+    (expr
+      (string))
+    (expr
+      (symbolic_name))
+    (expr
+      (symbolic_name))
+    (expr
+      (symbolic_name)
+      (subscript
+        (expr
+          (symbolic_name))
+        (expr
+          (symbolic_name))))
+    (operator)
+    (expr
+      (expr
+        (symbolic_name))
+      (operator)
+      (expr
+        (string)))))
 
 ================================================================================
 printf value using suffix
@@ -114,10 +110,9 @@ printf 'value %s\n', obj.val;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (printf
-      (expr
-        (string))
-      (expr
-        (symbolic_name)
-        (suffix)))))
+  (printf
+    (expr
+      (string))
+    (expr
+      (symbolic_name)
+      (suffix))))

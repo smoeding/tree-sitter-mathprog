@@ -5,20 +5,19 @@ display: 'x =', x, 'y =', y, 'z =', z;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (display
-      (expr
-        (string))
-      (expr
-        (symbolic_name))
-      (expr
-        (string))
-      (expr
-        (symbolic_name))
-      (expr
-        (string))
-      (expr
-        (symbolic_name)))))
+  (display
+    (expr
+      (string))
+    (expr
+      (symbolic_name))
+    (expr
+      (string))
+    (expr
+      (symbolic_name))
+    (expr
+      (string))
+    (expr
+      (symbolic_name))))
 
 ================================================================================
 display expression value
@@ -27,33 +26,32 @@ display sqrt(x ** 2 + y ** 2 + z ** 2);
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (display
-      (expr
-        (function_call
-          (function_name)
+  (display
+    (expr
+      (function_call
+        (function_name)
+        (expr
           (expr
             (expr
               (expr
-                (expr
-                  (symbolic_name))
-                (operator)
-                (expr
-                  (number)))
+                (symbolic_name))
               (operator)
               (expr
-                (expr
-                  (symbolic_name))
-                (operator)
-                (expr
-                  (number))))
+                (number)))
             (operator)
             (expr
               (expr
                 (symbolic_name))
               (operator)
               (expr
-                (number)))))))))
+                (number))))
+          (operator)
+          (expr
+            (expr
+              (symbolic_name))
+            (operator)
+            (expr
+              (number))))))))
 
 ================================================================================
 display set
@@ -62,32 +60,33 @@ display{i in I, j in J}: i, j, a[i,j], b[i,j];
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (display
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (symbolic_name)))
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (symbolic_name))))
-      (expr
-        (symbolic_name))
-      (expr
-        (symbolic_name))
-      (expr
+  (display
+    (indexing_expression
+      (indexing_entry
         (symbolic_name)
-        (subscript
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name))))
-      (expr
+        (operator)
+        (expr
+          (symbolic_name)))
+      (indexing_entry
         (symbolic_name)
-        (subscript
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name)))))))
+        (operator)
+        (expr
+          (symbolic_name))))
+    (expr
+      (symbolic_name))
+    (expr
+      (symbolic_name))
+    (expr
+      (symbolic_name)
+      (subscript
+        (expr
+          (symbolic_name))
+        (expr
+          (symbolic_name))))
+    (expr
+      (symbolic_name)
+      (subscript
+        (expr
+          (symbolic_name))
+        (expr
+          (symbolic_name))))))

@@ -5,12 +5,11 @@ param x := 123;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (param
-      (symbolic_name)
-      (attribute
-        (expr
-          (number))))))
+  (param
+    (model_object)
+    (attribute
+      (expr
+        (number)))))
 
 ================================================================================
 param with floating number
@@ -19,12 +18,11 @@ param x := 3.14159;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (param
-      (symbolic_name)
-      (attribute
-        (expr
-          (number))))))
+  (param
+    (model_object)
+    (attribute
+      (expr
+        (number)))))
 
 ================================================================================
 param with scientific number
@@ -33,12 +31,11 @@ param x := 56.E+5;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (param
-      (symbolic_name)
-      (attribute
-        (expr
-          (number))))))
+  (param
+    (model_object)
+    (attribute
+      (expr
+        (number)))))
 
 ================================================================================
 param with fractional number
@@ -47,12 +44,11 @@ param x := .78;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (param
-      (symbolic_name)
-      (attribute
-        (expr
-          (number))))))
+  (param
+    (model_object)
+    (attribute
+      (expr
+        (number)))))
 
 ================================================================================
 param with small scientific number
@@ -61,12 +57,11 @@ param x := 123.456e-7;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (param
-      (symbolic_name)
-      (attribute
-        (expr
-          (number))))))
+  (param
+    (model_object)
+    (attribute
+      (expr
+        (number)))))
 
 ================================================================================
 param with single bound
@@ -75,19 +70,19 @@ param units{raw, prd} >= 0;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (param
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (expr
-            (symbolic_name)))
-        (indexing_entry
-          (expr
-            (symbolic_name))))
-      (attribute
+  (param
+    (model_object)
+    (indexing_expression
+      (indexing_entry
         (expr
-          (number))))))
+          (symbolic_name)))
+      (indexing_entry
+        (expr
+          (symbolic_name))))
+    (attribute
+      (operator)
+      (expr
+        (number)))))
 
 ================================================================================
 param with multiple bounds
@@ -96,19 +91,20 @@ param N := 20 integer >= 0 <= 100;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (param
-      (symbolic_name)
-      (attribute
-        (expr
-          (number)))
-      (attribute)
-      (attribute
-        (expr
-          (number)))
-      (attribute
-        (expr
-          (number))))))
+  (param
+    (model_object)
+    (attribute
+      (expr
+        (number)))
+    (attribute)
+    (attribute
+      (operator)
+      (expr
+        (number)))
+    (attribute
+      (operator)
+      (expr
+        (number)))))
 
 ================================================================================
 param with alias and conditional value
@@ -118,72 +114,73 @@ param comb 'n choose k' {n in 0..N, k in 0..n} :=
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (param
-      (symbolic_name)
-      (alias)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (expr
-              (number))
-            (expr
-              (symbolic_name))))
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (expr
-              (number))
-            (expr
-              (symbolic_name)))))
-      (attribute
+  (param
+    (model_object)
+    (alias)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
         (expr
-          (conditional_expression
+          (expr
+            (number))
+          (expr
+            (symbolic_name))))
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
+          (expr
+            (number))
+          (expr
+            (symbolic_name)))))
+    (attribute
+      (expr
+        (conditional_expression
+          (expr
             (expr
               (expr
-                (expr
-                  (symbolic_name))
-                (operator)
-                (expr
-                  (number)))
+                (symbolic_name))
               (operator)
               (expr
-                (expr
-                  (symbolic_name))
-                (operator)
-                (expr
-                  (symbolic_name))))
-            (expr
-              (number))
+                (number)))
+            (operator)
             (expr
               (expr
-                (symbolic_name)
-                (subscript
-                  (expr
-                    (expr
-                      (symbolic_name))
-                    (operator)
-                    (expr
-                      (number)))
-                  (expr
-                    (expr
-                      (symbolic_name))
-                    (operator)
-                    (expr
-                      (number)))))
+                (symbolic_name))
               (operator)
               (expr
-                (symbolic_name)
-                (subscript
+                (symbolic_name))))
+          (expr
+            (number))
+          (expr
+            (expr
+              (symbolic_name)
+              (subscript
+                (expr
                   (expr
-                    (expr
-                      (symbolic_name))
-                    (operator)
-                    (expr
-                      (number)))
+                    (symbolic_name))
+                  (operator)
                   (expr
-                    (symbolic_name)))))))))))
+                    (number)))
+                (expr
+                  (expr
+                    (symbolic_name))
+                  (operator)
+                  (expr
+                    (number)))))
+            (operator)
+            (expr
+              (symbolic_name)
+              (subscript
+                (expr
+                  (expr
+                    (symbolic_name))
+                  (operator)
+                  (expr
+                    (number)))
+                (expr
+                  (symbolic_name))))))))))
 
 ================================================================================
 param with symbolic restriction
@@ -192,22 +189,21 @@ param month symbolic default 'May' in {'Mar', 'Apr', 'May'};
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (param
-      (symbolic_name)
-      (attribute)
-      (attribute
-        (expr
-          (string)))
-      (attribute
-        (expr
-          (literal_set
-            (sym_expr
-              (string))
-            (sym_expr
-              (string))
-            (sym_expr
-              (string))))))))
+  (param
+    (model_object)
+    (attribute)
+    (attribute
+      (expr
+        (string)))
+    (attribute
+      (expr
+        (literal_set
+          (sym_expr
+            (string))
+          (sym_expr
+            (string))
+          (sym_expr
+            (string)))))))
 
 ================================================================================
 param with mixed symbolic and numeric expressions
@@ -219,81 +215,34 @@ param days_in_month{m in 1..12}, integer, >= 28, <= 31, :=
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (param
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (expr
-              (number))
-            (expr
-              (number)))))
-      (attribute)
-      (attribute
-        (expr
-          (number)))
-      (attribute
-        (expr
-          (number)))
-      (attribute
+  (param
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
         (expr
           (expr
+            (number))
+          (expr
+            (number)))))
+    (attribute)
+    (attribute
+      (operator)
+      (expr
+        (number)))
+    (attribute
+      (operator)
+      (expr
+        (number)))
+    (attribute
+      (expr
+        (expr
+          (expr
             (expr
-              (expr
-                (function_call
-                  (function_name)
-                  (expr
-                    (expr
-                      (expr
-                        (expr
-                          (expr
-                            (symbolic_name))
-                          (operator)
-                          (expr
-                            (expr
-                              (conditional_expression
-                                (expr
-                                  (expr
-                                    (symbolic_name))
-                                  (operator)
-                                  (expr
-                                    (number)))
-                                (expr
-                                  (number))
-                                (expr
-                                  (number))))))
-                        (operator)
-                        (expr
-                          (string)))
-                      (operator)
-                      (expr
-                        (expr
-                          (conditional_expression
-                            (expr
-                              (expr
-                                (symbolic_name))
-                              (operator)
-                              (expr
-                                (number)))
-                            (expr
-                              (expr
-                                (symbolic_name))
-                              (operator)
-                              (expr
-                                (number)))
-                            (expr
-                              (number))))))
-                    (operator)
-                    (expr
-                      (string)))
-                  (expr
-                    (string))))
-              (operator)
-              (expr
-                (function_call
-                  (function_name)
+              (function_call
+                (function_name)
+                (expr
                   (expr
                     (expr
                       (expr
@@ -301,15 +250,64 @@ param days_in_month{m in 1..12}, integer, >= 28, <= 31, :=
                           (symbolic_name))
                         (operator)
                         (expr
-                          (string)))
+                          (expr
+                            (conditional_expression
+                              (expr
+                                (expr
+                                  (symbolic_name))
+                                (operator)
+                                (expr
+                                  (number)))
+                              (expr
+                                (number))
+                              (expr
+                                (number))))))
                       (operator)
                       (expr
-                        (symbolic_name)))
+                        (string)))
                     (operator)
                     (expr
-                      (string)))
+                      (expr
+                        (conditional_expression
+                          (expr
+                            (expr
+                              (symbolic_name))
+                            (operator)
+                            (expr
+                              (number)))
+                          (expr
+                            (expr
+                              (symbolic_name))
+                            (operator)
+                            (expr
+                              (number)))
+                          (expr
+                            (number))))))
+                  (operator)
                   (expr
-                    (string))))))
-          (operator)
-          (expr
-            (number)))))))
+                    (string)))
+                (expr
+                  (string))))
+            (operator)
+            (expr
+              (function_call
+                (function_name)
+                (expr
+                  (expr
+                    (expr
+                      (expr
+                        (symbolic_name))
+                      (operator)
+                      (expr
+                        (string)))
+                    (operator)
+                    (expr
+                      (symbolic_name)))
+                  (operator)
+                  (expr
+                    (string)))
+                (expr
+                  (string))))))
+        (operator)
+        (expr
+          (number))))))

@@ -75,11 +75,14 @@ export default grammar({
 
   rules: {
     model: $ => seq(
-      repeat(alias($.model_statement, $.statement)),
-      optional($._data_section),
+      repeat($._model_statement),
+      optional(seq(
+        $.data,
+        repeat($._data_statement),
+      )),
     ),
 
-    model_statement: $ => choice(
+    _model_statement: $ => choice(
       $.set,
       $.param,
       $.var,
@@ -94,18 +97,11 @@ export default grammar({
       $.end,
     ),
 
-    data_statement: $ => choice(
+    _data_statement: $ => choice(
       $.set_data,
       $.param_data,
       $.end,
     ),
-
-    _data_section: $ => seq(
-      alias($.data_intro, $.statement),
-      repeat(alias($.data_statement, $.statement)),
-    ),
-
-    data_intro: $ => $.data,
 
     data: $ => seq('data', ';'),
 
@@ -117,7 +113,7 @@ export default grammar({
 
     set: $ => seq(
       'set',
-      $.symbolic_name,
+      alias($.symbolic_name, $.model_object),
       optional(alias($.string, $.alias)),
       optional($.indexing_expression),
       repeat(seq(optional(','), alias($.set_attrib, $.attribute))),
@@ -129,13 +125,13 @@ export default grammar({
       seq('within', alias($.set_expr, $.expr)),
       seq(':=', alias($.set_expr, $.expr)),
       seq('default', alias($.set_expr, $.expr)),
-      seq('in', alias($.set_expr, $.expr)),
       // warning: keyword in understood as within
+      seq('in', alias($.set_expr, $.expr)),
     ),
 
     param: $ => seq(
       'param',
-      $.symbolic_name,
+      alias($.symbolic_name, $.model_object),
       optional(alias($.string, $.alias)),
       optional($.indexing_expression),
       repeat(seq(optional(','), alias($.param_attrib, $.attribute))),
@@ -148,7 +144,7 @@ export default grammar({
       'logical',           // warning: keyword logical understood as binary
       'symbolic',
       seq(
-        choice('<', '<=', '=', '==', '>=', '>', '<>', '!='),
+        alias(choice('<', '<=', '=', '==', '>=', '>', '<>', '!='), $.operator),
         alias(choice($.num_expr, $.sym_expr), $.expr),
       ),
       seq('in', alias($.set_expr, $.expr)),
@@ -158,7 +154,7 @@ export default grammar({
 
     var: $ => seq(
       'var',
-      $.symbolic_name,
+      alias($.symbolic_name, $.model_object),
       optional(alias($.string, $.alias)),
       optional($.indexing_expression),
       repeat(seq(optional(','), alias($.var_attrib, $.attribute))),
@@ -173,21 +169,25 @@ export default grammar({
 
     constraint: $ => seq(
       optional(choice(seq(choice('subj', 'subject'), 'to'), 's.t.')),
-      $.symbolic_name,
+      alias($.symbolic_name, $.model_object),
       optional(alias($.string, $.alias)),
       optional($.indexing_expression),
       ':',
       $.linear_expression,
       optional(','),
-      choice('=', '<=', '>='),
+      alias(choice('=', '<=', '>='), $.operator),
       $.linear_expression,
-      optional(seq(optional(','), choice('<=', '>='), $.linear_expression)),
+      optional(seq(
+        optional(','),
+        alias(choice('<=', '>='), $.operator),
+        $.linear_expression,
+      )),
       ';',
     ),
 
     objective: $ => seq(
       choice('maximize', 'minimize'),
-      $.symbolic_name,
+      alias($.symbolic_name, $.model_object),
       optional(alias($.string, $.alias)),
       optional($.indexing_expression),
       ':',
@@ -294,7 +294,7 @@ export default grammar({
 
     set_data: $ => seq(
       'set',
-      seq($.symbolic_name, optional($.subscript)),
+      seq(alias($.symbolic_name, $.model_object), optional($.subscript)),
       repeat1(seq(optional(','), alias($.set_data_record, $.record))),
       ';',
     ),
@@ -310,7 +310,7 @@ export default grammar({
       'param',
       choice(
         seq(
-          $.symbolic_name,
+          alias($.symbolic_name, $.model_object),
           optional(seq('default', $.value)),
           repeat1(seq(optional(','), alias($.param_data_record, $.record))),
         ),
@@ -392,7 +392,7 @@ export default grammar({
       $.number,
       seq($.symbolic_name, optional($.subscript)),
       $.function_call,
-      alias($.iterated_num_expr, $.expr),
+      alias($.iterated_num_expr, $.iterated_expression),
       alias($.conditional_num_expr, $.conditional_expression),
       seq('(', alias($.num_expr, $.expr), ')'),
     ),
@@ -449,7 +449,7 @@ export default grammar({
       alias($.set_expr, $.expr),
       seq(
         $.symbolic_name,
-        'in',
+        alias('in', $.operator),
         alias($.set_expr, $.expr),
       ),
       seq(
@@ -457,7 +457,7 @@ export default grammar({
         alias(choice($.num_expr, $.sym_expr), $.expr),
         repeat(seq(',', alias(choice($.num_expr, $.sym_expr), $.expr))),
         ')',
-        'in',
+        alias('in', $.operator),
         alias($.set_expr, $.expr),
       ),
     ),
@@ -473,15 +473,7 @@ export default grammar({
         optional(seq('by', alias($.num_expr, $.expr))),
       )),
       $.indexing_expression,
-      // Iterated expression
-      prec(PREC.SET, seq(
-        'setof',
-        $.indexing_expression,
-        choice(
-          alias($.num_expr, $.expr),
-          seq('(', sep1(alias($.num_expr, $.expr), ','), ')'),
-        )
-      )),
+      alias($.iterated_set_expr, $.iterated_expression),
       alias($.conditional_set_expr, $.conditional_expression),
       seq('(', alias($.set_expr, $.expr), ')'),
     )),
@@ -491,22 +483,22 @@ export default grammar({
 
       prec.left(PREC.UNION, seq(
         alias($.set_expr, $.expr),
-        'union',
+        alias('union', $.operator),
         alias($.set_expr, $.expr),
       )),
       prec.left(PREC.INTER, seq(
         alias($.set_expr, $.expr),
-        'inter',
+        alias('inter', $.operator),
         alias($.set_expr, $.expr),
       )),
       prec.left(PREC.CROSS, seq(
         alias($.set_expr, $.expr),
-        'cross',
+        alias('cross', $.operator),
         alias($.set_expr, $.expr),
       )),
       prec.left(PREC.DIFF, seq(
         alias($.set_expr, $.expr),
-        choice('diff', 'symdiff'),
+        alias(choice('diff', 'symdiff'), $.operator),
         alias($.set_expr, $.expr),
       )),
     ),
@@ -519,6 +511,15 @@ export default grammar({
       )),
       '}',
     ),
+
+    iterated_set_expr: $ => prec(PREC.SET, seq(
+      alias('setof', $.operator),
+      $.indexing_expression,
+      choice(
+        alias($.num_expr, $.expr),
+        seq('(', sep1(alias($.num_expr, $.expr), ','), ')'),
+      )
+    )),
 
     tupel: $ => prec.left(1, seq(
       '(',
@@ -550,22 +551,17 @@ export default grammar({
       )),
       prec(PREC.MEMB, seq(
         alias(choice($.num_expr, $.tupel), $.expr),
-        alias(optional(choice('not', '!')), $.operator),
+        optional(alias(choice('not', '!'), $.operator)),
         alias('in', $.operator),
         alias($.set_expr, $.expr),
       )),
       prec(PREC.MEMB, seq(
         alias($.set_expr, $.expr),
-        alias(optional(choice('not', '!')), $.operator),
+        optional(alias(choice('not', '!'), $.operator)),
         alias('within', $.operator),
         alias($.set_expr, $.expr),
       )),
-      // Iterated logical expression
-      prec(PREC.QUANT, seq(
-        alias(choice('exists', 'forall'), $.operator),
-        $.indexing_expression,
-        alias($.log_expr, $.expr),
-      )),
+      alias($.iterated_log_expr, $.iterated_expression),
       seq('(', alias($.log_expr, $.expr), ')'),
     )),
 
@@ -586,6 +582,12 @@ export default grammar({
         alias($.log_expr, $.expr),
       )),
     ),
+
+    iterated_log_expr: $ => prec(PREC.QUANT, seq(
+      alias(choice('exists', 'forall'), $.operator),
+      $.indexing_expression,
+      alias($.log_expr, $.expr),
+    )),
 
     // linear expression
     linear_expression: $ => prec.left(choice(
@@ -686,7 +688,7 @@ export default grammar({
     bareword: _ => /[a-zA-Z0-9_.+-]+/,
 
     comment: _ => choice(
-      seq('#', /.*/),
+      /#.*/,
       seq('/*', repeat(choice(/[^*]+/, /\*[^\/]/, /\\n/)), '*/'),
     ),
   },

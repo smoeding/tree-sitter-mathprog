@@ -4,7 +4,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
@@ -13,6 +13,10 @@
         },
         {
           "type": "number",
+          "named": true
+        },
+        {
+          "type": "operator",
           "named": true
         }
       ]
@@ -83,7 +87,11 @@
           "named": true
         },
         {
-          "type": "symbolic_name",
+          "type": "model_object",
+          "named": true
+        },
+        {
+          "type": "operator",
           "named": true
         }
       ]
@@ -140,6 +148,10 @@
         },
         {
           "type": "indexing_expression",
+          "named": true
+        },
+        {
+          "type": "iterated_expression",
           "named": true
         },
         {
@@ -245,6 +257,10 @@
           "named": true
         },
         {
+          "type": "operator",
+          "named": true
+        },
+        {
           "type": "symbolic_name",
           "named": true
         }
@@ -265,6 +281,29 @@
         },
         {
           "type": "indexing_entry",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "iterated_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expr",
+          "named": true
+        },
+        {
+          "type": "indexing_expression",
+          "named": true
+        },
+        {
+          "type": "operator",
           "named": true
         }
       ]
@@ -338,7 +377,63 @@
       "required": false,
       "types": [
         {
-          "type": "statement",
+          "type": "check",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "data",
+          "named": true
+        },
+        {
+          "type": "display",
+          "named": true
+        },
+        {
+          "type": "end",
+          "named": true
+        },
+        {
+          "type": "for",
+          "named": true
+        },
+        {
+          "type": "objective",
+          "named": true
+        },
+        {
+          "type": "param",
+          "named": true
+        },
+        {
+          "type": "param_data",
+          "named": true
+        },
+        {
+          "type": "printf",
+          "named": true
+        },
+        {
+          "type": "set",
+          "named": true
+        },
+        {
+          "type": "set_data",
+          "named": true
+        },
+        {
+          "type": "solve",
+          "named": true
+        },
+        {
+          "type": "table",
+          "named": true
+        },
+        {
+          "type": "var",
           "named": true
         }
       ]
@@ -362,6 +457,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "iterated_expression",
           "named": true
         },
         {
@@ -408,7 +507,7 @@
           "named": true
         },
         {
-          "type": "symbolic_name",
+          "type": "model_object",
           "named": true
         }
       ]
@@ -435,7 +534,7 @@
           "named": true
         },
         {
-          "type": "symbolic_name",
+          "type": "model_object",
           "named": true
         }
       ]
@@ -449,6 +548,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "model_object",
+          "named": true
+        },
         {
           "type": "record",
           "named": true
@@ -531,7 +634,7 @@
           "named": true
         },
         {
-          "type": "symbolic_name",
+          "type": "model_object",
           "named": true
         }
       ]
@@ -546,15 +649,15 @@
       "required": true,
       "types": [
         {
+          "type": "model_object",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
         {
           "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "symbolic_name",
           "named": true
         }
       ]
@@ -579,77 +682,6 @@
     "type": "solve",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "check",
-          "named": true
-        },
-        {
-          "type": "constraint",
-          "named": true
-        },
-        {
-          "type": "data",
-          "named": true
-        },
-        {
-          "type": "display",
-          "named": true
-        },
-        {
-          "type": "end",
-          "named": true
-        },
-        {
-          "type": "for",
-          "named": true
-        },
-        {
-          "type": "objective",
-          "named": true
-        },
-        {
-          "type": "param",
-          "named": true
-        },
-        {
-          "type": "param_data",
-          "named": true
-        },
-        {
-          "type": "printf",
-          "named": true
-        },
-        {
-          "type": "set",
-          "named": true
-        },
-        {
-          "type": "set_data",
-          "named": true
-        },
-        {
-          "type": "solve",
-          "named": true
-        },
-        {
-          "type": "table",
-          "named": true
-        },
-        {
-          "type": "var",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "subscript",
@@ -810,19 +842,11 @@
           "named": true
         },
         {
-          "type": "symbolic_name",
+          "type": "model_object",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "!=",
-    "named": false
-  },
-  {
-    "type": "#",
-    "named": false
   },
   {
     "type": "(",
@@ -881,10 +905,6 @@
     "named": false
   },
   {
-    "type": "<",
-    "named": false
-  },
-  {
     "type": "<-",
     "named": false
   },
@@ -893,19 +913,7 @@
     "named": false
   },
   {
-    "type": "<>",
-    "named": false
-  },
-  {
     "type": "=",
-    "named": false
-  },
-  {
-    "type": "==",
-    "named": false
-  },
-  {
-    "type": ">",
     "named": false
   },
   {
@@ -989,19 +997,11 @@
     "named": false
   },
   {
-    "type": "cross",
-    "named": false
-  },
-  {
     "type": "data",
     "named": false
   },
   {
     "type": "default",
-    "named": false
-  },
-  {
-    "type": "diff",
     "named": false
   },
   {
@@ -1049,10 +1049,6 @@
     "named": false
   },
   {
-    "type": "inter",
-    "named": false
-  },
-  {
     "type": "length",
     "named": false
   },
@@ -1085,6 +1081,10 @@
     "named": false
   },
   {
+    "type": "model_object",
+    "named": true
+  },
+  {
     "type": "number",
     "named": true
   },
@@ -1110,10 +1110,6 @@
   },
   {
     "type": "set",
-    "named": false
-  },
-  {
-    "type": "setof",
     "named": false
   },
   {
@@ -1161,10 +1157,6 @@
     "named": true
   },
   {
-    "type": "symdiff",
-    "named": false
-  },
-  {
     "type": "table",
     "named": false
   },
@@ -1186,10 +1178,6 @@
   },
   {
     "type": "trunc",
-    "named": false
-  },
-  {
-    "type": "union",
     "named": false
   },
   {

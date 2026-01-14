@@ -5,10 +5,9 @@ var x integer;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (var
-      (symbolic_name)
-      (attribute))))
+  (var
+    (model_object)
+    (attribute)))
 
 ================================================================================
 numeric variable with numeric constraint
@@ -17,12 +16,11 @@ var x >= 0;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (var
-      (symbolic_name)
-      (attribute
-        (expr
-          (number))))))
+  (var
+    (model_object)
+    (attribute
+      (expr
+        (number)))))
 
 ================================================================================
 variable with indexing expressions
@@ -31,16 +29,15 @@ var y{I,J};
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (var
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (expr
-            (symbolic_name)))
-        (indexing_entry
-          (expr
-            (symbolic_name)))))))
+  (var
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (expr
+          (symbolic_name)))
+      (indexing_entry
+        (expr
+          (symbolic_name))))))
 
 ================================================================================
 variable with indexing expression and multiple attributes
@@ -49,27 +46,27 @@ var make{p in prd}, integer, >= commit[p], <= market[p];
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (var
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
+  (var
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
+          (symbolic_name))))
+    (attribute)
+    (attribute
+      (expr
+        (symbolic_name)
+        (subscript
           (expr
-            (symbolic_name))))
-      (attribute)
-      (attribute
-        (expr
-          (symbolic_name)
-          (subscript
-            (expr
-              (symbolic_name)))))
-      (attribute
-        (expr
-          (symbolic_name)
-          (subscript
-            (expr
-              (symbolic_name))))))))
+            (symbolic_name)))))
+    (attribute
+      (expr
+        (symbolic_name)
+        (subscript
+          (expr
+            (symbolic_name)))))))
 
 ================================================================================
 variable with indexing expression using range
@@ -78,26 +75,25 @@ var store{raw, 1..T+1} >= 0;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (var
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (expr
-            (symbolic_name)))
-        (indexing_entry
-          (expr
-            (expr
-              (number))
-            (expr
-              (expr
-                (symbolic_name))
-              (operator)
-              (expr
-                (number))))))
-      (attribute
+  (var
+    (model_object)
+    (indexing_expression
+      (indexing_entry
         (expr
-          (number))))))
+          (symbolic_name)))
+      (indexing_entry
+        (expr
+          (expr
+            (number))
+          (expr
+            (expr
+              (symbolic_name))
+            (operator)
+            (expr
+              (number))))))
+    (attribute
+      (expr
+        (number)))))
 
 ================================================================================
 variable with indexing expression
@@ -106,17 +102,17 @@ var A{i in 1..T};
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (var
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
+  (var
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
           (expr
-            (expr
-              (number))
-            (expr
-              (symbolic_name))))))))
+            (number))
+          (expr
+            (symbolic_name)))))))
 
 ================================================================================
 variable with spaced indexing expression
@@ -125,17 +121,17 @@ var A{i in 1 .. T};
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (var
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
+  (var
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
           (expr
-            (expr
-              (number))
-            (expr
-              (symbolic_name))))))))
+            (number))
+          (expr
+            (symbolic_name)))))))
 
 ================================================================================
 variable with indexing expression using a float
@@ -144,17 +140,17 @@ var A{i in 1 .. T};
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (var
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
+  (var
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
           (expr
-            (expr
-              (number))
-            (expr
-              (symbolic_name))))))))
+            (number))
+          (expr
+            (symbolic_name)))))))
 
 ================================================================================
 variable with indexing expression using a spaced float
@@ -163,17 +159,17 @@ var A{i in 1. ..T};
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (var
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
+  (var
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
           (expr
-            (expr
-              (number))
-            (expr
-              (symbolic_name))))))))
+            (number))
+          (expr
+            (symbolic_name)))))))
 
 ================================================================================
 variable with indexing expression and bound
@@ -182,22 +178,23 @@ var z{i in I, j in J} >= i+j;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (var
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (symbolic_name)))
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (symbolic_name))))
-      (attribute
+  (var
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
         (expr
-          (expr
-            (symbolic_name))
-          (operator)
-          (expr
-            (symbolic_name)))))))
+          (symbolic_name)))
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
+          (symbolic_name))))
+    (attribute
+      (expr
+        (expr
+          (symbolic_name))
+        (operator)
+        (expr
+          (symbolic_name))))))

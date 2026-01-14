@@ -5,9 +5,8 @@ set nodes;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (set
-      (symbolic_name))))
+  (set
+    (model_object)))
 
 ================================================================================
 set with superset
@@ -16,15 +15,15 @@ set arcs within nodes cross nodes;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (set
-      (symbolic_name)
-      (attribute
+  (set
+    (model_object)
+    (attribute
+      (expr
         (expr
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name)))))))
+          (symbolic_name))
+        (operator)
+        (expr
+          (symbolic_name))))))
 
 ================================================================================
 set with setof condition
@@ -33,18 +32,21 @@ set C := setof{a in A, b in B[a]} b;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (set
-      (symbolic_name)
-      (attribute
-        (expr
+  (set
+    (model_object)
+    (attribute
+      (expr
+        (iterated_expression
+          (operator)
           (indexing_expression
             (indexing_entry
               (symbolic_name)
+              (operator)
               (expr
                 (symbolic_name)))
             (indexing_entry
               (symbolic_name)
+              (operator)
               (expr
                 (symbolic_name)
                 (subscript
@@ -61,18 +63,21 @@ set S := setof{c in C, i in 1..m, j in 1..n:
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (set
-      (symbolic_name)
-      (attribute
-        (expr
+  (set
+    (model_object)
+    (attribute
+      (expr
+        (iterated_expression
+          (operator)
           (indexing_expression
             (indexing_entry
               (symbolic_name)
+              (operator)
               (expr
                 (symbolic_name)))
             (indexing_entry
               (symbolic_name)
+              (operator)
               (expr
                 (expr
                   (number))
@@ -80,42 +85,45 @@ set S := setof{c in C, i in 1..m, j in 1..n:
                   (symbolic_name))))
             (indexing_entry
               (symbolic_name)
+              (operator)
               (expr
                 (expr
                   (number))
                 (expr
                   (symbolic_name))))
             (expr
-              (operator)
-              (indexing_expression
-                (indexing_entry
-                  (expr
-                    (symbolic_name))
-                  (expr
-                    (symbolic_name))
-                  (expr
-                    (symbolic_name)
-                    (subscript
-                      (expr
-                        (symbolic_name))))))
-              (expr
+              (iterated_expression
+                (operator)
+                (indexing_expression
+                  (indexing_entry
+                    (expr
+                      (symbolic_name))
+                    (expr
+                      (symbolic_name))
+                    (operator)
+                    (expr
+                      (symbolic_name)
+                      (subscript
+                        (expr
+                          (symbolic_name))))))
                 (expr
                   (expr
                     (expr
                       (expr
-                        (symbolic_name))
-                      (operator)
+                        (expr
+                          (symbolic_name))
+                        (operator)
+                        (expr
+                          (symbolic_name)))
                       (expr
-                        (symbolic_name)))
+                        (expr
+                          (symbolic_name))
+                        (operator)
+                        (expr
+                          (symbolic_name))))
+                    (operator)
                     (expr
-                      (expr
-                        (symbolic_name))
-                      (operator)
-                      (expr
-                        (symbolic_name))))
-                  (operator)
-                  (expr
-                    (symbolic_name))))))
+                      (symbolic_name)))))))
           (expr
             (symbolic_name))
           (expr
@@ -131,44 +139,48 @@ set step{s in 1..maxiter} dimen 2 := if s = 1 then arcs else step[s-1]
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (set
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
+  (set
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
+          (expr
+            (number))
+          (expr
+            (symbolic_name)))))
+    (attribute
+      (number))
+    (attribute
+      (expr
+        (conditional_expression
           (expr
             (expr
-              (number))
-            (expr
-              (symbolic_name)))))
-      (attribute
-        (number))
-      (attribute
-        (expr
-          (conditional_expression
-            (expr
-              (expr
-                (symbolic_name))
-              (operator)
-              (expr
-                (number)))
-            (expr
               (symbolic_name))
+            (operator)
             (expr
-              (expr
-                (symbolic_name)
-                (subscript
+              (number)))
+          (expr
+            (symbolic_name))
+          (expr
+            (expr
+              (symbolic_name)
+              (subscript
+                (expr
                   (expr
-                    (expr
-                      (symbolic_name))
-                    (operator)
-                    (expr
-                      (number)))))
-              (expr
+                    (symbolic_name))
+                  (operator)
+                  (expr
+                    (number)))))
+            (operator)
+            (expr
+              (iterated_expression
+                (operator)
                 (indexing_expression
                   (indexing_entry
                     (symbolic_name)
+                    (operator)
                     (expr
                       (symbolic_name)))
                   (indexing_entry
@@ -176,6 +188,7 @@ set step{s in 1..maxiter} dimen 2 := if s = 1 then arcs else step[s-1]
                       (symbolic_name))
                     (expr
                       (symbolic_name))
+                    (operator)
                     (expr
                       (symbolic_name)
                       (subscript
@@ -190,6 +203,7 @@ set step{s in 1..maxiter} dimen 2 := if s = 1 then arcs else step[s-1]
                       (symbolic_name))
                     (expr
                       (symbolic_name))
+                    (operator)
                     (expr
                       (symbolic_name)
                       (subscript
@@ -212,57 +226,60 @@ set A{i in I, j in J}, within B[i+1] cross C[j-1], within D diff E,
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (set
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
+  (set
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
+          (symbolic_name)))
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
+          (symbolic_name))))
+    (attribute
+      (expr
+        (expr
           (symbolic_name)
-          (expr
-            (symbolic_name)))
-        (indexing_entry
+          (subscript
+            (expr
+              (expr
+                (symbolic_name))
+              (operator)
+              (expr
+                (number)))))
+        (operator)
+        (expr
           (symbolic_name)
-          (expr
-            (symbolic_name))))
-      (attribute
+          (subscript
+            (expr
+              (expr
+                (symbolic_name))
+              (operator)
+              (expr
+                (number)))))))
+    (attribute
+      (expr
         (expr
-          (expr
-            (symbolic_name)
-            (subscript
-              (expr
-                (expr
-                  (symbolic_name))
-                (operator)
-                (expr
-                  (number)))))
-          (expr
-            (symbolic_name)
-            (subscript
-              (expr
-                (expr
-                  (symbolic_name))
-                (operator)
-                (expr
-                  (number)))))))
-      (attribute
+          (symbolic_name))
+        (operator)
         (expr
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name))))
-      (attribute
-        (expr
-          (literal_set
-            (tupel
-              (expr
-                (string))
-              (expr
-                (number)))
-            (tupel
-              (expr
-                (number))
-              (expr
-                (string)))))))))
+          (symbolic_name))))
+    (attribute
+      (expr
+        (literal_set
+          (tupel
+            (expr
+              (string))
+            (expr
+              (number)))
+          (tupel
+            (expr
+              (number))
+            (expr
+              (string))))))))
 
 ================================================================================
 set with set function call and comments
@@ -274,81 +291,82 @@ set Eh := { (i,j,k,l) in { V, V }:
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (set
-      (symbolic_name)
-      (attribute
-        (expr
-          (indexing_expression
-            (indexing_entry
-              (expr
-                (symbolic_name))
-              (expr
-                (symbolic_name))
-              (expr
-                (symbolic_name))
-              (expr
-                (symbolic_name))
-              (expr
-                (indexing_expression
-                  (indexing_entry
-                    (expr
-                      (symbolic_name)))
-                  (indexing_entry
-                    (expr
-                      (symbolic_name))))))
+  (set
+    (model_object)
+    (attribute
+      (expr
+        (indexing_expression
+          (indexing_entry
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (operator)
+            (expr
+              (indexing_expression
+                (indexing_entry
+                  (expr
+                    (symbolic_name)))
+                (indexing_entry
+                  (expr
+                    (symbolic_name))))))
+          (expr
             (expr
               (expr
                 (expr
-                  (expr
-                    (symbolic_name))
-                  (operator)
-                  (expr
-                    (symbolic_name)))
+                  (symbolic_name))
                 (operator)
                 (expr
-                  (expr
-                    (symbolic_name))
-                  (operator)
-                  (expr
-                    (symbolic_name))))
+                  (symbolic_name)))
               (operator)
-              (comment)
               (expr
                 (expr
-                  (function_call
-                    (function_name)
-                    (expr
-                      (indexing_expression
-                        (indexing_entry
-                          (expr
-                            (symbolic_name))
-                          (expr
-                            (symbolic_name))
-                          (expr
-                            (symbolic_name)))
+                  (symbolic_name))
+                (operator)
+                (expr
+                  (symbolic_name))))
+            (operator)
+            (comment)
+            (expr
+              (expr
+                (function_call
+                  (function_name)
+                  (expr
+                    (indexing_expression
+                      (indexing_entry
+                        (expr
+                          (symbolic_name))
+                        (expr
+                          (symbolic_name))
+                        (operator)
+                        (expr
+                          (symbolic_name)))
+                      (expr
                         (expr
                           (expr
                             (expr
-                              (expr
-                                (symbolic_name))
-                              (operator)
-                              (expr
-                                (symbolic_name)))
+                              (symbolic_name))
                             (operator)
                             (expr
-                              (expr
-                                (symbolic_name))
-                              (operator)
-                              (expr
-                                (symbolic_name))))
+                              (symbolic_name)))
                           (operator)
                           (expr
                             (expr
                               (symbolic_name))
                             (operator)
                             (expr
-                              (symbolic_name))))))))
-                (operator)
-                (expr
-                  (number))))))))))
+                              (symbolic_name))))
+                        (operator)
+                        (expr
+                          (expr
+                            (symbolic_name))
+                          (operator)
+                          (expr
+                            (symbolic_name))))))))
+              (operator)
+              (expr
+                (number)))))))))

@@ -5,25 +5,26 @@ s.t. r: x + y + z, >= 0, <= 1;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (constraint
-      (symbolic_name)
-      (linear_expression
+  (constraint
+    (model_object)
+    (linear_expression
+      (expr
         (expr
-          (expr
-            (symbolic_name))
-          (operator)
-          (expr
-            (symbolic_name)))
+          (symbolic_name))
         (operator)
         (expr
           (symbolic_name)))
-      (linear_expression
-        (expr
-          (number)))
-      (linear_expression
-        (expr
-          (number))))))
+      (operator)
+      (expr
+        (symbolic_name)))
+    (operator)
+    (linear_expression
+      (expr
+        (number)))
+    (operator)
+    (linear_expression
+      (expr
+        (number)))))
 
 ================================================================================
 complex constraint without keyword
@@ -32,35 +33,37 @@ limit{t in 1..T}: sum{j in prd} make[j,t] <= max_prd;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (constraint
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (expr
-              (number))
-            (expr
-              (symbolic_name)))))
-      (linear_expression
+  (constraint
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
         (expr
           (expr
-            (operator)
-            (indexing_expression
-              (indexing_entry
-                (symbolic_name)
-                (expr
-                  (symbolic_name))))
-            (expr
+            (number))
+          (expr
+            (symbolic_name)))))
+    (linear_expression
+      (expr
+        (iterated_expression
+          (operator)
+          (indexing_expression
+            (indexing_entry
               (symbolic_name)
-              (subscript
-                (expr
-                  (symbolic_name))
-                (expr
-                  (symbolic_name)))))))
-      (linear_expression
-        (symbolic_name)))))
+              (operator)
+              (expr
+                (symbolic_name))))
+          (expr
+            (symbolic_name)
+            (subscript
+              (expr
+                (symbolic_name))
+              (expr
+                (symbolic_name)))))))
+    (operator)
+    (linear_expression
+      (symbolic_name))))
 
 ================================================================================
 complex constraint with alias
@@ -71,55 +74,57 @@ subject to rlim 'regular-time limit' {t in time}:
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (constraint
-      (symbolic_name)
-      (alias)
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
-          (expr
-            (symbolic_name))))
-      (linear_expression
+  (constraint
+    (model_object)
+    (alias)
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
         (expr
-          (expr
-            (operator)
-            (indexing_expression
-              (indexing_entry
-                (symbolic_name)
-                (expr
-                  (symbolic_name))))
-            (expr
-              (expr
-                (symbolic_name)
-                (subscript
-                  (expr
-                    (symbolic_name))))
+          (symbolic_name))))
+    (linear_expression
+      (expr
+        (iterated_expression
+          (operator)
+          (indexing_expression
+            (indexing_entry
+              (symbolic_name)
               (operator)
               (expr
-                (symbolic_name)
-                (subscript
-                  (expr
-                    (symbolic_name))
-                  (expr
-                    (symbolic_name))))))))
-      (linear_expression
-        (expr
+                (symbolic_name))))
           (expr
             (expr
-              (number))
+              (symbolic_name)
+              (subscript
+                (expr
+                  (symbolic_name))))
             (operator)
             (expr
               (symbolic_name)
               (subscript
                 (expr
-                  (symbolic_name)))))
+                  (symbolic_name))
+                (expr
+                  (symbolic_name))))))))
+    (operator)
+    (linear_expression
+      (expr
+        (expr
+          (expr
+            (number))
           (operator)
           (expr
             (symbolic_name)
             (subscript
               (expr
-                (symbolic_name)))))))))
+                (symbolic_name)))))
+        (operator)
+        (expr
+          (symbolic_name)
+          (subscript
+            (expr
+              (symbolic_name))))))))
 
 ================================================================================
 constraint with many variables
@@ -130,26 +135,107 @@ s.t. cbup2{(v1,v2,v3,v4,v5,v6) in Cells: v1+v2+v3+v4+v5+v6<6}:
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (constraint
-      (symbolic_name)
-      (indexing_expression
-        (indexing_entry
+  (constraint
+    (model_object)
+    (indexing_expression
+      (indexing_entry
+        (expr
+          (symbolic_name))
+        (expr
+          (symbolic_name))
+        (expr
+          (symbolic_name))
+        (expr
+          (symbolic_name))
+        (expr
+          (symbolic_name))
+        (expr
+          (symbolic_name))
+        (operator)
+        (expr
+          (symbolic_name)))
+      (expr
+        (expr
           (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name))
+            (expr
+              (expr
+                (expr
+                  (expr
+                    (symbolic_name))
+                  (operator)
+                  (expr
+                    (symbolic_name)))
+                (operator)
+                (expr
+                  (symbolic_name)))
+              (operator)
+              (expr
+                (symbolic_name)))
+            (operator)
+            (expr
+              (symbolic_name)))
+          (operator)
           (expr
             (symbolic_name)))
+        (operator)
         (expr
+          (number))))
+    (linear_expression
+      (expr
+        (symbolic_name)
+        (subscript
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))))
+      (operator)
+      (expr
+        (expr
+          (linear_expression
+            (expr
+              (expr
+                (number))
+              (operator)
+              (expr
+                (number)))))
+        (operator)
+        (expr
+          (symbolic_name)
+          (subscript
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))
+            (expr
+              (symbolic_name))))))
+    (operator)
+    (linear_expression
+      (expr
+        (linear_expression
+          (expr
+            (expr
+              (number))
+            (operator)
+            (expr
+              (number)))))
+      (operator)
+      (expr
+        (symbolic_name)
+        (subscript
           (expr
             (expr
               (expr
@@ -171,84 +257,4 @@ s.t. cbup2{(v1,v2,v3,v4,v5,v6) in Cells: v1+v2+v3+v4+v5+v6<6}:
                 (symbolic_name)))
             (operator)
             (expr
-              (symbolic_name)))
-          (operator)
-          (expr
-            (number))))
-      (linear_expression
-        (expr
-          (symbolic_name)
-          (subscript
-            (expr
-              (symbolic_name))
-            (expr
-              (symbolic_name))
-            (expr
-              (symbolic_name))
-            (expr
-              (symbolic_name))
-            (expr
-              (symbolic_name))
-            (expr
-              (symbolic_name))))
-        (operator)
-        (expr
-          (expr
-            (linear_expression
-              (expr
-                (expr
-                  (number))
-                (operator)
-                (expr
-                  (number)))))
-          (operator)
-          (expr
-            (symbolic_name)
-            (subscript
-              (expr
-                (symbolic_name))
-              (expr
-                (symbolic_name))
-              (expr
-                (symbolic_name))
-              (expr
-                (symbolic_name))
-              (expr
-                (symbolic_name))
-              (expr
-                (symbolic_name))))))
-      (linear_expression
-        (expr
-          (linear_expression
-            (expr
-              (expr
-                (number))
-              (operator)
-              (expr
-                (number)))))
-        (operator)
-        (expr
-          (symbolic_name)
-          (subscript
-            (expr
-              (expr
-                (expr
-                  (expr
-                    (expr
-                      (expr
-                        (symbolic_name))
-                      (operator)
-                      (expr
-                        (symbolic_name)))
-                    (operator)
-                    (expr
-                      (symbolic_name)))
-                  (operator)
-                  (expr
-                    (symbolic_name)))
-                (operator)
-                (expr
-                  (symbolic_name)))
-              (operator)
-              (expr
-                (symbolic_name)))))))))
+              (symbolic_name))))))))

@@ -1,6 +1,6 @@
 LANGUAGE_NAME := tree-sitter-mathprog
 HOMEPAGE_URL := https://github.com/smoeding/tree-sitter-mathprog
-VERSION := 0.1.0
+VERSION := 0.2.0
 
 # repository
 SRC_DIR := src

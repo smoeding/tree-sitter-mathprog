@@ -5,17 +5,16 @@ check card(C) = 63;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (check
+  (check
+    (expr
       (expr
-        (expr
-          (function_call
-            (function_name)
-            (expr
-              (symbolic_name))))
-        (operator)
-        (expr
-          (number))))))
+        (function_call
+          (function_name)
+          (expr
+            (symbolic_name))))
+      (operator)
+      (expr
+        (number)))))
 
 ================================================================================
 check multiple conditions
@@ -24,34 +23,33 @@ check: x + y <= 1 and x >= 0 and y >= 0;
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (check
+  (check
+    (expr
       (expr
         (expr
-          (expr
-            (expr
-              (expr
-                (symbolic_name))
-              (operator)
-              (expr
-                (symbolic_name)))
-            (operator)
-            (expr
-              (number)))
-          (operator)
           (expr
             (expr
               (symbolic_name))
             (operator)
             (expr
-              (number))))
+              (symbolic_name)))
+          (operator)
+          (expr
+            (number)))
         (operator)
         (expr
           (expr
             (symbolic_name))
           (operator)
           (expr
-            (number)))))))
+            (number))))
+      (operator)
+      (expr
+        (expr
+          (symbolic_name))
+        (operator)
+        (expr
+          (number))))))
 
 ================================================================================
 check set condition
@@ -60,36 +58,37 @@ check sum{i in ORIG} supply[i] = sum{j in DEST} demand[j];
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (check
+  (check
+    (expr
       (expr
-        (expr
-          (expr
-            (operator)
-            (indexing_expression
-              (indexing_entry
-                (symbolic_name)
-                (expr
-                  (symbolic_name))))
-            (expr
+        (iterated_expression
+          (operator)
+          (indexing_expression
+            (indexing_entry
               (symbolic_name)
-              (subscript
-                (expr
-                  (symbolic_name))))))
-        (operator)
-        (expr
+              (operator)
+              (expr
+                (symbolic_name))))
           (expr
-            (operator)
-            (indexing_expression
-              (indexing_entry
-                (symbolic_name)
-                (expr
-                  (symbolic_name))))
-            (expr
+            (symbolic_name)
+            (subscript
+              (expr
+                (symbolic_name))))))
+      (operator)
+      (expr
+        (iterated_expression
+          (operator)
+          (indexing_expression
+            (indexing_entry
               (symbolic_name)
-              (subscript
-                (expr
-                  (symbolic_name))))))))))
+              (operator)
+              (expr
+                (symbolic_name))))
+          (expr
+            (symbolic_name)
+            (subscript
+              (expr
+                (symbolic_name)))))))))
 
 ================================================================================
 check domain set condition
@@ -98,37 +97,39 @@ check{i in I, j in 1..10}: S[i,j] in U[i] union V[j];
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (check
-      (indexing_expression
-        (indexing_entry
-          (symbolic_name)
+  (check
+    (indexing_expression
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
+          (symbolic_name)))
+      (indexing_entry
+        (symbolic_name)
+        (operator)
+        (expr
           (expr
-            (symbolic_name)))
-        (indexing_entry
-          (symbolic_name)
+            (number))
           (expr
-            (expr
-              (number))
-            (expr
-              (number)))))
+            (number)))))
+    (expr
+      (expr
+        (symbolic_name)
+        (subscript
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name))))
+      (operator)
       (expr
         (expr
           (symbolic_name)
           (subscript
             (expr
-              (symbolic_name))
-            (expr
               (symbolic_name))))
         (operator)
         (expr
-          (expr
-            (symbolic_name)
-            (subscript
-              (expr
-                (symbolic_name))))
-          (expr
-            (symbolic_name)
-            (subscript
-              (expr
-                (symbolic_name)))))))))
+          (symbolic_name)
+          (subscript
+            (expr
+              (symbolic_name))))))))

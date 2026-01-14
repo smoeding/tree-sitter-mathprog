@@ -5,19 +5,18 @@ for {1..72} printf("*");
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (for
-      (indexing_expression
-        (indexing_entry
-          (expr
-            (expr
-              (number))
-            (expr
-              (number)))))
-      (printf
+  (for
+    (indexing_expression
+      (indexing_entry
         (expr
           (expr
-            (string)))))))
+            (number))
+          (expr
+            (number)))))
+    (printf
+      (expr
+        (expr
+          (string))))))
 
 ================================================================================
 for with block
@@ -29,45 +28,45 @@ for {(i,j) in E: i != j}
 --------------------------------------------------------------------------------
 
 (model
-  (statement
-    (for
-      (indexing_expression
-        (indexing_entry
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name))
-          (expr
-            (symbolic_name)))
-        (expr
-          (expr
-            (symbolic_name))
-          (operator)
-          (expr
-            (symbolic_name))))
-      (printf
-        (expr
-          (string))
+  (for
+    (indexing_expression
+      (indexing_entry
         (expr
           (symbolic_name))
         (expr
           (symbolic_name))
+        (operator)
+        (expr
+          (symbolic_name)))
+      (expr
+        (expr
+          (symbolic_name))
+        (operator)
+        (expr
+          (symbolic_name))))
+    (printf
+      (expr
+        (string))
+      (expr
+        (symbolic_name))
+      (expr
+        (symbolic_name))
+      (expr
+        (symbolic_name)
+        (subscript
+          (expr
+            (symbolic_name))
+          (expr
+            (symbolic_name)))))
+    (check
+      (expr
         (expr
           (symbolic_name)
           (subscript
             (expr
               (symbolic_name))
             (expr
-              (symbolic_name)))))
-      (check
+              (symbolic_name))))
+        (operator)
         (expr
-          (expr
-            (symbolic_name)
-            (subscript
-              (expr
-                (symbolic_name))
-              (expr
-                (symbolic_name))))
-          (operator)
-          (expr
-            (number)))))))
+          (number))))))
