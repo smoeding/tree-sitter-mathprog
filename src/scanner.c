@@ -46,6 +46,7 @@
 enum TokenType {
   STRING,
   NUMBER,
+  END_OF_TOKEN,
 };
 
 
@@ -54,7 +55,7 @@ enum TokenType {
  * quote.
  */
 
-static bool scan_string(TSLexer *lexer) {
+static inline bool scan_string(TSLexer *lexer) {
   int32_t quote = 0;
 
   typedef enum ScanString {
@@ -105,7 +106,7 @@ static bool scan_string(TSLexer *lexer) {
  * will not be parsed as number but as a value range (e.g. 1..5).
  */
 
-static bool scan_number(TSLexer *lexer) {
+static inline bool scan_number(TSLexer *lexer) {
   int integer_digits = 0;
   int fractional_digits = 0;
 
@@ -257,6 +258,17 @@ static bool scan_number(TSLexer *lexer) {
 }
 
 /**
+ * Check if the lookahead character does not look like a symbol token. This
+ * is used to ensure certain keywords like 'in' are used isolated and are
+ * not part of a longer identifier like 'input'.
+ */
+
+static inline bool check_end_of_token(TSLexer *lexer) {
+  // Return a zero-length token (don't advance the lexer state)
+  return !(isalnum(lexer->lookahead) || lexer->lookahead == U'_');
+}
+
+/**
  * The public interface used by the tree-sitter parser
  */
 
@@ -275,6 +287,12 @@ void tree_sitter_mathprog_external_scanner_deserialize(void *payload, const char
 }
 
 bool tree_sitter_mathprog_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
+  if (valid_symbols[END_OF_TOKEN]) {
+    if (check_end_of_token(lexer)) {
+      lexer->result_symbol = END_OF_TOKEN;
+      return true;
+    }
+  }
   if (valid_symbols[STRING]) {
     if (scan_string(lexer)) {
       lexer->result_symbol = STRING;

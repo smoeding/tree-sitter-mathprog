@@ -56,7 +56,7 @@ export default grammar({
 
   extras: $ => [
     $.comment,
-    /[ |\f|\n|\r|\t|\v]+/,
+    /\s/,
   ],
 
   conflicts: $ => [
@@ -68,6 +68,7 @@ export default grammar({
   externals: $ => [
     $.string,
     $.number,
+    $._end_of_token,
   ],
 
   // keyword extraction optimization
@@ -121,12 +122,12 @@ export default grammar({
     ),
 
     set_attrib: $ => choice(
-      seq('dimen', alias(/[0-9]+/, $.number)),
-      seq('within', alias($.set_expr, $.expr)),
+      seq('dimen', $._end_of_token, alias(/[0-9]+/, $.number)),
+      seq('within', $._end_of_token, alias($.set_expr, $.expr)),
       seq(':=', alias($.set_expr, $.expr)),
-      seq('default', alias($.set_expr, $.expr)),
+      seq('default', $._end_of_token, alias($.set_expr, $.expr)),
       // warning: keyword in understood as within
-      seq('in', alias($.set_expr, $.expr)),
+      seq('in', $._end_of_token, alias($.set_expr, $.expr)),
     ),
 
     param: $ => seq(
@@ -147,9 +148,13 @@ export default grammar({
         alias(choice('<', '<=', '=', '==', '>=', '>', '<>', '!='), $.operator),
         alias(choice($.num_expr, $.sym_expr), $.expr),
       ),
-      seq('in', alias($.set_expr, $.expr)),
+      seq('in', $._end_of_token, alias($.set_expr, $.expr)),
       seq(':=', alias(choice($.num_expr, $.sym_expr), $.expr)),
-      seq('default', alias(choice($.num_expr, $.sym_expr), $.expr)),
+      seq(
+        'default',
+        $._end_of_token,
+        alias(choice($.num_expr, $.sym_expr), $.expr),
+      ),
     ),
 
     var: $ => seq(
@@ -684,10 +689,10 @@ export default grammar({
     //   seq('"', repeat(choice(/[^"\\]+/, /\\./, '""')), '"'),
     // ),
 
-    symbolic_name: _ => /[a-zA-Z_][a-zA-Z0-9_]*/,
-    bareword: _ => /[a-zA-Z0-9_.+-]+/,
+    symbolic_name: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
+    bareword: $ => /[a-zA-Z0-9_.+-]+/,
 
-    comment: _ => choice(
+    comment: $ => choice(
       /#.*/,
       seq('/*', repeat(choice(/[^*]+/, /\*[^\/]/, /\\n/)), '*/'),
     ),

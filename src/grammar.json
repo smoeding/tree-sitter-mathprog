@@ -226,6 +226,10 @@
               "value": "dimen"
             },
             {
+              "type": "SYMBOL",
+              "name": "_end_of_token"
+            },
+            {
               "type": "ALIAS",
               "content": {
                 "type": "PATTERN",
@@ -242,6 +246,10 @@
             {
               "type": "STRING",
               "value": "within"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_end_of_token"
             },
             {
               "type": "ALIAS",
@@ -280,6 +288,10 @@
               "value": "default"
             },
             {
+              "type": "SYMBOL",
+              "name": "_end_of_token"
+            },
+            {
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
@@ -296,6 +308,10 @@
             {
               "type": "STRING",
               "value": "in"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_end_of_token"
             },
             {
               "type": "ALIAS",
@@ -482,6 +498,10 @@
               "value": "in"
             },
             {
+              "type": "SYMBOL",
+              "name": "_end_of_token"
+            },
+            {
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
@@ -525,6 +545,10 @@
             {
               "type": "STRING",
               "value": "default"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_end_of_token"
             },
             {
               "type": "ALIAS",
@@ -4679,7 +4703,7 @@
     },
     {
       "type": "PATTERN",
-      "value": "[ |\\f|\\n|\\r|\\t|\\v]+"
+      "value": "\\s"
     }
   ],
   "conflicts": [
@@ -4706,6 +4730,10 @@
     {
       "type": "SYMBOL",
       "name": "number"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_end_of_token"
     }
   ],
   "inline": [],
