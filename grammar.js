@@ -214,7 +214,7 @@ export default grammar({
       'display',
       optional($.indexing_expression),
       optional(':'),
-      sep1(alias(choice($.num_expr, $.sym_expr, $.log_expr), $.expr), ','),
+      sep1(alias(choice($.num_expr, $.set_expr, $.sym_expr, $.log_expr), $.expr), ','),
       ';',
     ),
 

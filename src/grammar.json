@@ -1047,6 +1047,10 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "set_expr"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "sym_expr"
                   },
                   {
@@ -1078,6 +1082,10 @@
                           {
                             "type": "SYMBOL",
                             "name": "num_expr"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "set_expr"
                           },
                           {
                             "type": "SYMBOL",
