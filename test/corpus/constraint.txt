@@ -42,6 +42,7 @@ limit{t in 1..T}: sum{j in prd} make[j,t] <= max_prd;
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (symbolic_name)))))
     (linear_expression

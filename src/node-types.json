@@ -885,10 +885,6 @@
     "named": false
   },
   {
-    "type": "..",
-    "named": false
-  },
-  {
     "type": "/*",
     "named": false
   },
@@ -974,10 +970,6 @@
   },
   {
     "type": "binary",
-    "named": false
-  },
-  {
-    "type": "by",
     "named": false
   },
   {

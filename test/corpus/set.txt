@@ -81,6 +81,7 @@ set S := setof{c in C, i in 1..m, j in 1..n:
               (expr
                 (expr
                   (number))
+                (operator)
                 (expr
                   (symbolic_name))))
             (indexing_entry
@@ -89,6 +90,7 @@ set S := setof{c in C, i in 1..m, j in 1..n:
               (expr
                 (expr
                   (number))
+                (operator)
                 (expr
                   (symbolic_name))))
             (expr
@@ -148,6 +150,7 @@ set step{s in 1..maxiter} dimen 2 := if s = 1 then arcs else step[s-1]
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (symbolic_name)))))
     (attribute

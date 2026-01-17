@@ -473,9 +473,12 @@ export default grammar({
       // Arithmetic set
       prec(PREC.SET, seq(
         alias($.num_expr, $.expr),
-        '..',
+        alias('..', $.operator),
         alias($.num_expr, $.expr),
-        optional(seq('by', alias($.num_expr, $.expr))),
+        optional(seq(
+          alias('by', $.operator),
+          alias($.num_expr, $.expr),
+        )),
       )),
       $.indexing_expression,
       alias($.iterated_set_expr, $.iterated_expression),

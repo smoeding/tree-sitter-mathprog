@@ -124,6 +124,7 @@ param comb 'n choose k' {n in 0..N, k in 0..n} :=
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (symbolic_name))))
       (indexing_entry
@@ -132,6 +133,7 @@ param comb 'n choose k' {n in 0..N, k in 0..n} :=
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (symbolic_name)))))
     (attribute
@@ -224,6 +226,7 @@ param days_in_month{m in 1..12}, integer, >= 28, <= 31, :=
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (number)))))
     (attribute)

@@ -110,6 +110,7 @@ check{i in I, j in 1..10}: S[i,j] in U[i] union V[j];
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (number)))))
     (expr

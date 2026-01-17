@@ -85,6 +85,7 @@ var store{raw, 1..T+1} >= 0;
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (expr
               (symbolic_name))
@@ -111,6 +112,7 @@ var A{i in 1..T};
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (symbolic_name)))))))
 
@@ -130,6 +132,7 @@ var A{i in 1 .. T};
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (symbolic_name)))))))
 
@@ -149,6 +152,7 @@ var A{i in 1 .. T};
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (symbolic_name)))))))
 
@@ -168,6 +172,7 @@ var A{i in 1. ..T};
         (expr
           (expr
             (number))
+          (operator)
           (expr
             (symbolic_name)))))))
 

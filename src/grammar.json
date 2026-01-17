@@ -3013,8 +3013,13 @@
                   "value": "expr"
                 },
                 {
-                  "type": "STRING",
-                  "value": ".."
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "STRING",
+                    "value": ".."
+                  },
+                  "named": true,
+                  "value": "operator"
                 },
                 {
                   "type": "ALIAS",
@@ -3032,8 +3037,13 @@
                       "type": "SEQ",
                       "members": [
                         {
-                          "type": "STRING",
-                          "value": "by"
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "STRING",
+                            "value": "by"
+                          },
+                          "named": true,
+                          "value": "operator"
                         },
                         {
                           "type": "ALIAS",
