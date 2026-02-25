@@ -5,4 +5,4 @@
 
 GNU MathProg is the modeling language used by the [GNU Linear Programming Kit](https://www.gnu.org/software/glpk/) to describe linear programming models. MathProg implements a subset of the [AMPL](https://en.wikipedia.org/wiki/AMPL) language.
 
-This project uses the [Tree-sitter](https://tree-sitter.github.io/) framework to implement a parser for the language.
+This parser is used for my [Emacs major mode with tree-sitter support for MathProg manifests](https://github.com/smoeding/mathprog-ts-mode).
