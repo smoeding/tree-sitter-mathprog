@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-mathprog
-        VERSION "0.2.0"
+        VERSION "1.0.0"
         DESCRIPTION "Mathprog grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/smoeding/tree-sitter-mathprog"
         LANGUAGES C)
